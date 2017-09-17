@@ -1,0 +1,13 @@
+<div class="mb-2">
+  <div class="form-inline">
+    <button class="btn btn-danger mr-sm-2" (click)="onDelete.emit()"><i class="fa fa-trash"></i></button>
+
+    <input id="variable" type="text" class="form-control mr-sm-2" [(ngModel)]="variable.name"/>
+
+    <label class="mr-sm-2" for="value" [mathJax]="variable.name + ' ='"></label>
+    <input id="value" type="text" class="form-control mr-sm-2" [(ngModel)]="variable.value"/>
+
+    <label class="mr-sm-2" for="delta" [mathJax]="'\\Delta ' + variable.name + ' ='"></label>
+    <input id="delta" type="text" class="form-control mr-sm-2" [(ngModel)]="variable.delta"/>
+  </div>
+</div>
