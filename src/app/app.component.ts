@@ -38,7 +38,8 @@ export class AppComponent {
 
   getResultFunction(): string {
     try {
-      return 'R = ' + this.getResult();
+      const result = this.getResult();
+      return 'R = ' + result.toString().replace(/e\+?(-?)(\d+)/, ' \\times 10^{$1$2}');
     } catch (ex) {
       return '';
     }
@@ -122,14 +123,14 @@ export class AppComponent {
       const a = Math.round(result / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
       const b = Math.round(uncertainty / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
 
-      return 'R = \\left(' + a + ' \\pm ' + b + '\\right) \\times 10^' + resultExp;
+      return 'R = \\left(' + a + ' \\pm ' + b + '\\right) \\times 10^{' + resultExp + '}';
     } catch (ex) {
       return '';
     }
   }
 
-  getExp(num): number {
-    if (num === 0) {
+  getExp(num: number): number {
+    if (!isFinite(num) || isNaN(num) || num === 0) {
       return 0;
     }
 
