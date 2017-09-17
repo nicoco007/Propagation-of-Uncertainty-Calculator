@@ -1,3 +1,4 @@
+<h1>Propagation of Uncertainty Calculator</h1>
 <h3>Variables</h3>
 <p><button class="btn btn-primary btn-sm" (click)="addVariable()"><i class="fa fa-plus"></i></button></p>
 <div class="variables mb-5">
@@ -6,9 +7,13 @@
 
 <h3>Equation</h3>
 <div class="eq mb-5">
-  <div class="form-inline">
-    <label class="mr-2" [katex]="'R = '"></label>
-    <input id="equation" class="form-control" type="text" [(ngModel)]="equation"/>
+  <div class="row">
+    <div class="form-group col-12 d-flex align-items-center">
+      <label class="mr-2 mb-0" [katex]="'R = '"></label>
+      <div class="input-group">
+        <input id="equation" class="form-control d-block" type="text" [(ngModel)]="equation"/>
+      </div>
+    </div>
   </div>
 </div>
 

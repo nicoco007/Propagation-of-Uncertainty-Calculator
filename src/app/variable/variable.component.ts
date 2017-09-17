@@ -4,7 +4,7 @@ import {Variable} from '../variable';
 @Component({
   selector: 'app-variable',
   templateUrl: './variable.component.html',
-  styleUrls: ['./variable.component.css']
+  styleUrls: ['./variable.component.scss']
 })
 export class VariableComponent {
   @Input() variable: Variable;
