@@ -10,7 +10,7 @@
     </div>
 
     <div class="mb-2 col-md-5 d-flex align-items-center">
-      <label class="mb-0 mr-2" for="value" [katex]="variable.name || '?' + ' ='"></label>
+      <label class="mb-0 mr-2" for="value" [katex]="(variable.name || '?') + ' ='"></label>
       <div class="input-group">
         <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value"/>
       </div>
