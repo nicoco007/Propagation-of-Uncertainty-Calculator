@@ -1,5 +1,6 @@
-import {Component, OnChanges, SimpleChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {Variable} from './variable';
+import {Util} from './util';
 
 declare const math: any;
 
@@ -74,10 +75,11 @@ export class AppComponent {
       steps.push('\\sqrt{' + parts2.join(' + ') + '}');
 
       const result = this.getUncertainty();
-      const exp = this.getExp(result);
+      const exp = Util.getExp(result);
 
-      steps.push(result / Math.pow(10, exp) + ' \\times 10^{' + exp + '}');
-      steps.push(result.toPrecision(1) / Math.pow(10, exp) + ' \\times 10^{' + exp + '}');
+      steps.push(result);
+      steps.push(Util.fixPrecision(result / Math.pow(10, exp)) + ' \\times 10^{' + exp + '}');
+      steps.push(Util.fixPrecision(parseFloat(result.toPrecision(1)) / Math.pow(10, exp)) + ' \\times 10^{' + exp + '}');
 
       return '\\begin{aligned} \\Delta R &= ' + steps.join(' \\\\ &= ') + ' \\end{aligned}';
     } catch (ex) {
@@ -92,7 +94,7 @@ export class AppComponent {
       scope[this.variables[i].name] = this.variables[i].value;
     }
 
-    return math.eval(this.equation, scope);
+    return Util.fixPrecision(math.eval(this.equation, scope));
   }
 
   private getUncertainty() {
@@ -109,47 +111,23 @@ export class AppComponent {
 
     const eq = 'sqrt(' + parts.join(' + ') + ')';
 
-    return math.eval(eq, scope);
+    return Util.fixPrecision(math.eval(eq, scope));
   }
 
   getResultWithUncertainty(): string {
     try {
-      const result = this.getResult();
-      const uncertainty = this.getUncertainty();
-      const resultExp = this.getExp(result);
-      const uncertaintyExp = this.getExp(uncertainty);
-      const diffExp = resultExp - uncertaintyExp;
+      const result              = this.getResult();
+      const uncertainty         = this.getUncertainty();
+      const resultExp           = Util.getExp(result);
+      const uncertaintyExp      = Util.getExp(uncertainty);
+      const diffExp             = resultExp - uncertaintyExp;
 
-      const a = Math.round(result / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
-      const b = Math.round(uncertainty / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
+      const roundedResult       = Math.round(result / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
+      const roundedUncertainty  = Math.round(uncertainty / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
 
-      return 'R = \\left(' + a + ' \\pm ' + b + '\\right) \\times 10^{' + resultExp + '}';
+      return 'R = \\left(' + roundedResult + ' \\pm ' + roundedUncertainty + '\\right) \\times 10^{' + resultExp + '}';
     } catch (ex) {
       return '';
     }
-  }
-
-  getExp(num: number): number {
-    if (!isFinite(num) || isNaN(num) || num === 0) {
-      return 0;
-    }
-
-    let abs = Math.abs(num);
-    const sign = abs > 1 ? 1 : -1;
-    let count = 0;
-
-    if (abs > 1) {
-      while (Math.round(abs) > 10) {
-        abs = abs / 10;
-        count++;
-      }
-    } else {
-      while (Math.round(abs) < 1) {
-        abs = abs * 10;
-        count++;
-      }
-    }
-
-    return count * sign;
   }
 }
