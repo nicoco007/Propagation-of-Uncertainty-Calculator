@@ -36,55 +36,119 @@ export class AppComponent {
     return '';
   }
 
-  resultFunction(): string {
+  getResultFunction(): string {
     try {
-      const scope = {};
-
-      for (let i = 0; i < this.variables.length; i++) {
-        scope[this.variables[i].name] = this.variables[i].value;
-      }
-
-      return 'R = ' + math.eval(this.equation, scope);
+      return 'R = ' + this.getResult();
     } catch (ex) {
       return '';
     }
   }
 
-  deltaResultFunction(): string {
-    const steps = [];
-    const parts = [];
-    const parts2 = [];
-    const parts3 = [];
+  getDeltaResultFunction(): string {
+    try {
+      const steps = [];
+      const parts = [];
+      const parts2 = [];
+      const parts3 = [];
 
-    const scope = {};
+      const scope = {};
 
-    for (let i = 0; i < this.variables.length; i++) {
-      const variable = this.variables[i];
-      const derivative = this.derivative(variable.name);
+      for (let i = 0; i < this.variables.length; i++) {
+        const variable = this.variables[i];
+        const derivative = this.derivative(variable.name);
 
-      if (!derivative) {
-        return '';
+        if (!derivative) {
+          return '';
+        }
+
+        parts.push('\\left( \\frac{\\partial R}{\\partial ' + variable.name + '} \\Delta ' + variable.name + '\\right)^2');
+        parts2.push('\\left( ' + derivative + ' \\cdot \\Delta ' + variable.name + '\\right)^2');
+
+        parts3.push('(' + derivative.toString() + ' * ' + variable.delta + ')^2');
+
+        scope[variable.name] = variable.value;
       }
 
-      parts.push('\\left( \\frac{\\partial R}{\\partial ' + variable.name + '} \\Delta ' + variable.name + '\\right)^2');
-      parts2.push('\\left( ' + derivative + ' \\cdot \\Delta ' + variable.name + '\\right)^2');
+      steps.push('\\sqrt{' + parts.join(' + ') + '}');
+      steps.push('\\sqrt{' + parts2.join(' + ') + '}');
 
-      parts3.push('(' + derivative.toString() + ' * ' + variable.delta + ')^2');
+      const result = this.getUncertainty();
+      const exp = this.getExp(result);
 
-      scope[variable.name] = variable.value;
-    }
-
-    steps.push('\\sqrt{' + parts.join(' + ') + '}');
-    steps.push('\\sqrt{' + parts2.join(' + ') + '}');
-
-    try {
-      const result = math.eval('sqrt(' + parts3.join(' + ') + ')', scope);
-      steps.push(result);
-      steps.push(parseFloat(result.toPrecision(1)).toExponential().replace(/e\+?(-?)(\d+)/, ' \\times 10^{$1$2}'));
+      steps.push(result / Math.pow(10, exp) + ' \\times 10^{' + exp + '}');
+      steps.push(result.toPrecision(1) / Math.pow(10, exp) + ' \\times 10^{' + exp + '}');
 
       return '\\begin{align} \\Delta R &= ' + steps.join(' \\\\ &= ') + ' \\end{align}';
     } catch (ex) {
       return '';
     }
+  }
+
+  private getResult(): number {
+    const scope = {};
+
+    for (let i = 0; i < this.variables.length; i++) {
+      scope[this.variables[i].name] = this.variables[i].value;
+    }
+
+    return math.eval(this.equation, scope);
+  }
+
+  private getUncertainty() {
+    const scope = {};
+    const parts = [];
+
+    for (let i = 0; i < this.variables.length; i++) {
+      const variable = this.variables[i];
+      const derivative = math.derivative(this.equation, variable.name);
+      parts.push('(' + derivative.toString() + ' * ' + variable.delta + ')^2');
+
+      scope[variable.name] = variable.value;
+    }
+
+    const eq = 'sqrt(' + parts.join(' + ') + ')';
+
+    return math.eval(eq, scope);
+  }
+
+  getResultWithUncertainty(): string {
+    try {
+      const result = this.getResult();
+      const uncertainty = this.getUncertainty();
+      const resultExp = this.getExp(result);
+      const uncertaintyExp = this.getExp(uncertainty);
+      const diffExp = resultExp - uncertaintyExp;
+
+      const a = Math.round(result / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
+      const b = Math.round(uncertainty / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
+
+      return 'R = \\left(' + a + ' \\pm ' + b + '\\right) \\times 10^' + resultExp;
+    } catch (ex) {
+      return '';
+    }
+  }
+
+  getExp(num): number {
+    if (num === 0) {
+      return 0;
+    }
+
+    let abs = Math.abs(num);
+    const sign = abs > 1 ? 1 : -1;
+    let count = 0;
+
+    if (abs > 1) {
+      while (Math.round(abs) > 10) {
+        abs = abs / 10;
+        count++;
+      }
+    } else {
+      while (Math.round(abs) < 1) {
+        abs = abs * 10;
+        count++;
+      }
+    }
+
+    return count * sign;
   }
 }
