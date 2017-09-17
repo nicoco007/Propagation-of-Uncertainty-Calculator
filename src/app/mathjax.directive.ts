@@ -1,21 +1,17 @@
 import {Directive, ElementRef, Input, OnChanges} from '@angular/core';
 
-declare const MathJax: any;
+declare const katex: any;
 
 @Directive({
-  selector: '[mathJax]'
+  selector: '[katex]'
 })
 export class MathJaxDirective implements OnChanges {
-  @Input('mathJax') mathJax: string;
+  @Input('katex') katex: string;
 
   constructor(private el: ElementRef) {
   }
 
   ngOnChanges() {
-    this.el.nativeElement.style.display = 'none';
-    this.el.nativeElement.innerHTML = '$$' + this.mathJax + '$$';
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.el.nativeElement], () => {
-      this.el.nativeElement.style.display = 'block';
-    });
+    this.el.nativeElement.innerHTML = katex.renderToString(this.katex);
   }
 }

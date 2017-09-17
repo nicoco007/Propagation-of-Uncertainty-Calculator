@@ -4,10 +4,10 @@
 
     <input id="variable" type="text" class="form-control mr-sm-2" [(ngModel)]="variable.name"/>
 
-    <label class="mr-sm-2" for="value" [mathJax]="variable.name + ' ='"></label>
+    <label class="mr-sm-2" for="value" [katex]="variable.name + ' ='"></label>
     <input id="value" type="text" class="form-control mr-sm-2" [(ngModel)]="variable.value"/>
 
-    <label class="mr-sm-2" for="delta" [mathJax]="'\\Delta ' + variable.name + ' ='"></label>
+    <label class="mr-sm-2" for="delta" [katex]="'\\Delta ' + variable.name + ' ='"></label>
     <input id="delta" type="text" class="form-control mr-sm-2" [(ngModel)]="variable.delta"/>
   </div>
 </div>

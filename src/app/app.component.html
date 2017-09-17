@@ -7,14 +7,14 @@
 <h3>Equation</h3>
 <div class="eq mb-5">
   <div class="form-inline">
-    <label class="mr-2">$$R = $$</label>
+    <label class="mr-2" [katex]="'R = '"></label>
     <input id="equation" class="form-control" type="text" [(ngModel)]="equation"/>
   </div>
 </div>
 
 <h3>Result</h3>
 <div class="result">
-  <p [mathJax]="getResultFunction()"></p>
-  <p [mathJax]="getDeltaResultFunction()"></p>
-  <p [mathJax]="getResultWithUncertainty()"></p>
+  <p [katex]="getResultFunction()"></p>
+  <p [katex]="getDeltaResultFunction()"></p>
+  <p [katex]="getResultWithUncertainty()"></p>
 </div>

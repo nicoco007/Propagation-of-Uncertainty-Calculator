@@ -78,7 +78,7 @@ export class AppComponent {
       steps.push(result / Math.pow(10, exp) + ' \\times 10^{' + exp + '}');
       steps.push(result.toPrecision(1) / Math.pow(10, exp) + ' \\times 10^{' + exp + '}');
 
-      return '\\begin{align} \\Delta R &= ' + steps.join(' \\\\ &= ') + ' \\end{align}';
+      return '\\begin{aligned} \\Delta R &= ' + steps.join(' \\\\ &= ') + ' \\end{aligned}';
     } catch (ex) {
       return '';
     }
