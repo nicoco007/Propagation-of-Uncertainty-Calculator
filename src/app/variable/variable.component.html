@@ -1,6 +1,6 @@
-<div class="mb-2">
+<div class="mb-1">
   <div class="row">
-    <div class="mb-1 col-md-2 d-flex align-items-center">
+    <div class="mb-2 col-md-2 d-flex align-items-center">
       <div class="input-group">
         <span class="input-group-btn">
           <button class="btn btn-danger" (click)="onDelete.emit()"><i class="fa fa-trash"></i></button>
@@ -9,14 +9,14 @@
       </div>
     </div>
 
-    <div class="mb-1 col-md-5 d-flex align-items-center">
+    <div class="mb-2 col-md-5 d-flex align-items-center">
       <label class="mb-0 mr-2" for="value" [katex]="variable.name || '?' + ' ='"></label>
       <div class="input-group">
         <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value"/>
       </div>
     </div>
 
-    <div class="mb-1 col-md-5 d-flex align-items-center">
+    <div class="mb-2 col-md-5 d-flex align-items-center">
       <label class="mb-0 mr-2" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
       <div class="input-group">
         <input id="delta" type="text" class="form-control d-block" [(ngModel)]="variable.delta"/>
