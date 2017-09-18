@@ -75,7 +75,7 @@ export class AppComponent {
       steps.push('\\sqrt{' + parts2.join(' + ') + '}');
 
       const result = this.getUncertainty();
-      const exp = Util.getExp(result);
+      const exp = Util.getPowerOf10(result);
 
       steps.push(result);
       steps.push(Util.fixPrecision(result / Math.pow(10, exp)) + ' \\times 10^{' + exp + '}');
@@ -118,8 +118,8 @@ export class AppComponent {
     try {
       const result              = this.getResult();
       const uncertainty         = this.getUncertainty();
-      const resultExp           = Util.getExp(result);
-      const uncertaintyExp      = Util.getExp(uncertainty);
+      const resultExp           = Util.getPowerOf10(result);
+      const uncertaintyExp      = Util.getPowerOf10(uncertainty);
       const diffExp             = resultExp - uncertaintyExp;
 
       const roundedResult       = Math.round(result / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
