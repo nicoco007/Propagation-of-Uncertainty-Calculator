@@ -4,10 +4,10 @@
   overflow-x: auto;
 
   background-image:
-    linear-gradient(to right, white, transparent),
-    linear-gradient(to right, transparent, white),
-    linear-gradient(to right, rgba(0,0,0,.25), rgba(255,255,255,0)),
-    linear-gradient(to left, rgba(0,0,0,.25), rgba(255,255,255,0));
+    linear-gradient(to right, white 30%, transparent),
+    linear-gradient(to right, transparent, white 70%),
+    radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
 
   background-position: left center, right center, left center, right center;
   background-repeat: no-repeat;
