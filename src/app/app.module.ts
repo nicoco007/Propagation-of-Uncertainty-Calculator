@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { VariableComponent } from './variable/variable.component';
 import {FormsModule} from '@angular/forms';
-import { MathJaxDirective } from './mathjax.directive';
+import { KatexDirective } from './katex.directive';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { MathJaxDirective } from './mathjax.directive';
   declarations: [
     AppComponent,
     VariableComponent,
-    MathJaxDirective
+    KatexDirective
   ],
   providers: [],
   bootstrap: [AppComponent]

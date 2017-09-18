@@ -5,7 +5,7 @@ declare const katex: any;
 @Directive({
   selector: '[katex]'
 })
-export class MathJaxDirective implements OnChanges {
+export class KatexDirective implements OnChanges {
   @Input('katex') katex: string;
 
   constructor(private el: ElementRef) {
