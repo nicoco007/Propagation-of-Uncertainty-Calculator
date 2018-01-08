@@ -11,9 +11,9 @@
   <div class="row">
     <div class="form-group col-12 d-flex align-items-center">
       <div class="input-group">
-        <input id="result-variable" class="form-control" type="text" [(ngModel)]="resultVariable" placeholder="Result">
+        <input id="result-variable" class="form-control" type="text" [(ngModel)]="resultVariable" title="Result Variable">
         <label class="input-group-addon mb-0 pb-1" for="equation" katex=" = "></label>
-        <input id="equation" class="form-control" type="text" [(ngModel)]="equation" placeholder="Equation"/>
+        <input id="equation" class="form-control" type="text" [(ngModel)]="equation" placeholder="Equation" [class.is-invalid]="!isEquationValid()"/>
       </div>
     </div>
   </div>

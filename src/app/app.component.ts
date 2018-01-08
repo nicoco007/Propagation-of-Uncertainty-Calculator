@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Variable} from './variable';
 import {Util} from './util';
 
@@ -9,18 +9,15 @@ declare const math: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   resultVariable = 'R';
   equation = 'm/V';
+  invalidInput = false;
 
   variables: Variable[] = [
     new Variable('V', 6.95e-6, 0.03e-6),
     new Variable('m', 1.87e-2, 0.01e-2)
   ];
-
-  ngOnInit(): void {
-
-  }
 
   addVariable() {
     this.variables.push(new Variable());
@@ -29,6 +26,15 @@ export class AppComponent implements OnInit {
   deleteVariable(variable) {
     const index = this.variables.indexOf(variable);
     this.variables.splice(index, 1);
+  }
+
+  isEquationValid() {
+    try {
+      math.parse(this.equation);
+      return true;
+    } catch (ex) {
+      return false;
+    }
   }
 
   derivative(inRespectTo: string): string {

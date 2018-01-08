@@ -1,0 +1,12 @@
+.variable {
+  margin-bottom: 0.25rem;
+
+  .variable-name, .variable-value, .variable-delta {
+    margin-bottom: 0.5rem;
+
+    .input-group-addon {
+      padding-bottom: 0.25rem;
+      margin-bottom: 0;
+    }
+  }
+}

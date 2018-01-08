@@ -1,26 +1,24 @@
-<div class="mb-1">
-  <div class="row">
-    <div class="mb-2 col-md-2 d-flex align-items-center">
-      <div class="input-group">
-        <span class="input-group-btn">
-          <button class="btn btn-danger" (click)="onDelete.emit()" title="Remove Variable"><i class="fa fa-trash"></i><span class="sr-only">Remove Variable</span></button>
-        </span>
-        <input id="variable" type="text" class="form-control" [(ngModel)]="variable.name" placeholder="Name"/>
-      </div>
+<div class="variable row">
+  <div class="variable-name col-md-2">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-danger" (click)="onDelete.emit()" title="Remove Variable"><i class="fa fa-trash"></i><span class="sr-only">Remove Variable</span></button>
+      </span>
+      <input id="variable" type="text" class="form-control" [(ngModel)]="variable.name" placeholder="Name"/>
     </div>
+  </div>
 
-    <div class="mb-2 col-md-5 d-flex align-items-center">
-      <div class="input-group">
-        <label class="input-group-addon mb-0 pb-1" for="value" [katex]="(variable.name || '?') + ' ='"></label>
-        <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value" placeholder="Value"/>
-      </div>
+  <div class="variable-value col-md-5">
+    <div class="input-group">
+      <label class="input-group-addon" for="value" [katex]="(variable.name || '?') + ' ='"></label>
+      <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value" placeholder="Value"/>
     </div>
+  </div>
 
-    <div class="mb-2 col-md-5 d-flex align-items-center">
-      <div class="input-group">
-        <label class="input-group-addon mb-0 pb-1" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
-        <input id="delta" type="text" class="form-control d-block" [(ngModel)]="variable.delta" placeholder="Error"/>
-      </div>
+  <div class="variable-delta col-md-5">
+    <div class="input-group">
+      <label class="input-group-addon" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
+      <input id="delta" type="text" class="form-control d-block" [(ngModel)]="variable.delta" placeholder="Error"/>
     </div>
   </div>
 </div>
