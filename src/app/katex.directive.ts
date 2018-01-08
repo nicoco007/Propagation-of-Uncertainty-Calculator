@@ -1,6 +1,5 @@
 import {Directive, ElementRef, Input, OnChanges} from '@angular/core';
-
-declare const katex: any;
+import * as katex from 'katex';
 
 @Directive({
   selector: '[katex]'

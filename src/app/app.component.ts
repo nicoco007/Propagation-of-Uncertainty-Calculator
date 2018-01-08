@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Variable} from './variable';
 import {Util} from './util';
 
@@ -9,7 +9,7 @@ declare const math: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   resultVariable = 'R';
   equation = 'm/V';
 
@@ -17,6 +17,10 @@ export class AppComponent {
     new Variable('V', 6.95e-6, 0.03e-6),
     new Variable('m', 1.87e-2, 0.01e-2)
   ];
+
+  ngOnInit(): void {
+
+  }
 
   addVariable() {
     this.variables.push(new Variable());

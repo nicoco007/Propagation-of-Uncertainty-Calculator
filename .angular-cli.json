@@ -19,10 +19,12 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/scss/bootstrap.scss",
+        "../node_modules/katex/dist/katex.css",
         "styles.scss"
       ],
       "scripts": [
-        "../node_modules/mathjs/dist/math.min.js"
+        "../node_modules/mathjs/dist/math.js",
+        "../node_modules/katex/dist/katex.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
