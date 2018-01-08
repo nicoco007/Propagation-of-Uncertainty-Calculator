@@ -10,7 +10,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'rm -r /var/www/gnyra.com/public_html/propagation-of-uncertainty/* && cp -r dist/* /var/www/gnyra.com/public_html/propagation-of-uncertainty/'
+        sh 'rm -rf /var/www/gnyra.com/public_html/propagation-of-uncertainty/* && cp -r dist/* /var/www/gnyra.com/public_html/propagation-of-uncertainty/'
       }
     }
   }
