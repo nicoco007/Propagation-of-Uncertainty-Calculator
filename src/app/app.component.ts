@@ -10,7 +10,9 @@ declare const math: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  resultVariable = 'R';
   equation = 'm/V';
+
   variables: Variable[] = [
     new Variable('V', 6.95e-6, 0.03e-6),
     new Variable('m', 1.87e-2, 0.01e-2)
@@ -40,7 +42,7 @@ export class AppComponent {
   getResultFunction(): string {
     try {
       const result = this.getResult();
-      return 'R = ' + result.toString().replace(/e\+?(-?)(\d+)/, ' \\times 10^{$1$2}');
+      return this.resultVariable + ' = ' + result.toString().replace(/e\+?(-?)(\d+)/, ' \\times 10^{$1$2}');
     } catch (ex) {
       return '';
     }
@@ -63,7 +65,7 @@ export class AppComponent {
           return '';
         }
 
-        parts.push('\\left( \\frac{\\partial R}{\\partial ' + variable.name + '} \\Delta ' + variable.name + '\\right)^2');
+        parts.push(`\\left( \\frac{\\partial ${this.resultVariable}}{\\partial ${variable.name}} \\Delta ${variable.name} \\right)^2`);
         parts2.push('\\left( ' + derivative + ' \\cdot \\Delta ' + variable.name + '\\right)^2');
 
         parts3.push('(' + derivative.toString() + ' * ' + variable.delta + ')^2');
@@ -81,7 +83,7 @@ export class AppComponent {
       steps.push(Util.fixPrecision(result / Math.pow(10, exp)) + ' \\times 10^{' + exp + '}');
       steps.push(Util.fixPrecision(parseFloat(result.toPrecision(1)) / Math.pow(10, exp)) + ' \\times 10^{' + exp + '}');
 
-      return '\\begin{aligned} \\Delta R &= ' + steps.join(' \\\\ &= ') + ' \\end{aligned}';
+      return `\\begin{aligned} \\Delta ${this.resultVariable} &= ${steps.join(' \\\\ &= ')} \\end{aligned}`;
     } catch (ex) {
       return '';
     }
@@ -125,7 +127,7 @@ export class AppComponent {
       const roundedResult       = Math.round(result / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
       const roundedUncertainty  = Math.round(uncertainty / Math.pow(10, uncertaintyExp)) / Math.pow(10, diffExp);
 
-      return 'R = \\left(' + roundedResult + ' \\pm ' + roundedUncertainty + '\\right) \\times 10^{' + resultExp + '}';
+      return `${this.resultVariable} = \\left( ${roundedResult} \\pm ${roundedUncertainty} \\right) \\times 10^{${resultExp}}`;
     } catch (ex) {
       return '';
     }
