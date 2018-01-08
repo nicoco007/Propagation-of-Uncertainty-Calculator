@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'npm install -d'
+        sh 'npm install'
         sh 'ng build --prod --base-href /propagation-of-uncertainty/'
         archiveArtifacts 'dist/**'
       }
