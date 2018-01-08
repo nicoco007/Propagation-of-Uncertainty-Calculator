@@ -1,13 +1,13 @@
 <h1>Propagation of Uncertainty Calculator</h1>
-<p class="lead">Uncertain about your uncertainty calculations? This tool helps you check if you're right or wrong, with steps! <strong>Found a bug? <a href="https://github.com/nicoco007/Propagation-of-Uncertainty-Calculator/issues">Report it!</a></strong></p>
-<h3>Variables</h3>
-<p><button class="btn btn-primary btn-sm" (click)="addVariable()" title="Add Variable"><i class="fa fa-plus"></i><span class="sr-only">Add Variable</span></button></p>
-<div class="variables mb-5">
+<p class="lead">Uncertain about your uncertainty calculations? This tool helps you check if you're right or wrong, with steps! Found a bug? <a href="https://github.com/nicoco007/Propagation-of-Uncertainty-Calculator/issues">Report it!</a></p>
+<h2>Variables</h2>
+<div class="variables">
   <app-variable *ngFor="let variable of variables" [variable]="variable" (onDelete)="deleteVariable(variable)"></app-variable>
 </div>
+<p><button class="btn btn-primary btn-sm" (click)="addVariable()" title="Add Variable"><i class="fa fa-plus"></i><span class="sr-only">Add Variable</span></button></p>
 
-<h3>Equation</h3>
-<div class="eq mb-5">
+<h2>Equation</h2>
+<div class="eq">
   <div class="row">
     <div class="form-group col-12 d-flex align-items-center">
       <div class="input-group">
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<h3>Result</h3>
+<h2>Result</h2>
 <div class="result">
   <p [katex]="getResultFunction()"></p>
   <p [katex]="getDeltaResultFunction()"></p>
