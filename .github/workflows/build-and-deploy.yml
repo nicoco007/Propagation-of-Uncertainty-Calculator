@@ -1,0 +1,51 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2.1.4
+        
+      - name: Install packages
+        run: npm ci
+        
+      - name: Build
+        run: npm run-script ng build -- --prod --base-href /Propagation-of-Uncertainty-Calculator/
+
+      - name: Push to GitHub Pages
+        run: |
+          hash=$(git log -n 1 --pretty="%h")
+          name=$(git log -n 1 --pretty="%an")
+          email=$(git log -n 1 --pretty="%ae")
+
+          git clone https://nicoco007:${{ github.token }}@github.com/nicoco007/Propagation-of-Uncertainty-Calculator gh-pages --no-checkout --single-branch --branch gh-pages
+
+          cp -r dist/** gh-pages
+          cd gh-pages
+
+          echo "Committing as $name <$email>"
+
+          git config user.name $name
+          git config user.email $email
+
+          git add -f .
+          git commit --message "Update deployed site @ $hash" || [[ $res -le 1 ]]
+          git push
