@@ -11,7 +11,7 @@
   <div class="variable-value col-md-5">
     <div class="input-group">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="value" [katex]="(variable.name || '?') + ' ='"></label>
+        <label class="input-group-text" for="value" [katex]="(variable.name || '?') + ' ='"></label>
       </div>
       <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value" placeholder="Value" title="Variable Value" />
     </div>
@@ -20,7 +20,7 @@
   <div class="variable-delta col-md-5">
     <div class="input-group">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
+        <label class="input-group-text" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
       </div>
       <input id="delta" type="text" class="form-control d-block" [(ngModel)]="variable.delta" placeholder="Error/Uncertainty" title="Variable Error/Uncertainty" />
     </div>
