@@ -27,7 +27,10 @@
             ],
             "scripts": [
               "node_modules/mathjs/lib/browser/math.js",
-              "node_modules/katex/dist/katex.js"
+              "node_modules/katex/dist/katex.js",
+              "node_modules/@fortawesome/fontawesome-free/js/fontawesome.js",
+              "node_modules/@fortawesome/fontawesome-free/js/solid.js",
+              "node_modules/@fortawesome/fontawesome-free/js/brands.js"
             ]
           },
           "configurations": {
@@ -81,7 +84,10 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/mathjs/lib/browser/math.js",
-              "node_modules/katex/dist/katex.js"
+              "node_modules/katex/dist/katex.js",
+              "node_modules/@fortawesome/fontawesome-free/js/fontawesome.js",
+              "node_modules/@fortawesome/fontawesome-free/js/solid.js",
+              "node_modules/@fortawesome/fontawesome-free/js/brands.js"
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
