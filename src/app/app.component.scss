@@ -25,3 +25,7 @@
 h2 {
   margin-top: 2rem;
 }
+
+.input-group-append + input {
+  border-left: 0;
+}

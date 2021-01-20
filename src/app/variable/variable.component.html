@@ -1,24 +1,28 @@
 <div class="variable row">
   <div class="variable-name col-md-2">
     <div class="input-group">
-      <span class="input-group-btn">
+      <span class="input-group-prepend">
         <button class="btn btn-danger" (click)="onDelete.emit()" title="Remove Variable"><i class="fa fa-trash"></i><span class="sr-only">Remove Variable</span></button>
       </span>
-      <input id="variable" type="text" class="form-control" [(ngModel)]="variable.name" placeholder="Name"/>
+      <input id="variable" type="text" class="form-control" [(ngModel)]="variable.name" placeholder="Name" title="Variable Name" />
     </div>
   </div>
 
   <div class="variable-value col-md-5">
     <div class="input-group">
-      <label class="input-group-addon" for="value" [katex]="(variable.name || '?') + ' ='"></label>
-      <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value" placeholder="Value"/>
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="value" [katex]="(variable.name || '?') + ' ='"></label>
+      </div>
+      <input id="value" type="text" class="form-control d-block" [(ngModel)]="variable.value" placeholder="Value" title="Variable Value" />
     </div>
   </div>
 
   <div class="variable-delta col-md-5">
     <div class="input-group">
-      <label class="input-group-addon" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
-      <input id="delta" type="text" class="form-control d-block" [(ngModel)]="variable.delta" placeholder="Error"/>
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="delta" [katex]="'\\Delta ' + (variable.name || '?') + ' ='"></label>
+      </div>
+      <input id="delta" type="text" class="form-control d-block" [(ngModel)]="variable.delta" placeholder="Error/Uncertainty" title="Variable Error/Uncertainty" />
     </div>
   </div>
 </div>
