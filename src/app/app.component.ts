@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {Variable} from './variable';
 import {Util} from './util';
-
-declare const math: any;
+import * as math from 'mathjs';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +41,10 @@ export class AppComponent {
       try {
         return math.derivative(this.equation, inRespectTo).toString();
       } catch (ex) {
+        if (!(ex instanceof SyntaxError)) {
+          console.log(ex);
+        }
+
         return '';
       }
     }
@@ -54,6 +57,10 @@ export class AppComponent {
       const result = this.getResult();
       return this.resultVariable + ' = ' + result.toString().replace(/e\+?(-?)(\d+)/, ' \\times 10^{$1$2}');
     } catch (ex) {
+      if (!(ex instanceof SyntaxError)) {
+        console.log(ex);
+      }
+
       return '';
     }
   }
@@ -95,6 +102,10 @@ export class AppComponent {
 
       return `\\begin{aligned} \\Delta ${this.resultVariable} &= ${steps.join(' \\\\ &= ')} \\end{aligned}`;
     } catch (ex) {
+      if (!(ex instanceof SyntaxError)) {
+        console.log(ex);
+      }
+
       return '';
     }
   }
@@ -106,7 +117,7 @@ export class AppComponent {
       scope[this.variables[i].name] = this.variables[i].value;
     }
 
-    return Util.fixPrecision(math.eval(this.equation, scope));
+    return Util.fixPrecision(math.evaluate(this.equation, scope));
   }
 
   private getUncertainty() {
@@ -123,7 +134,7 @@ export class AppComponent {
 
     const eq = 'sqrt(' + parts.join(' + ') + ')';
 
-    return Util.fixPrecision(math.eval(eq, scope));
+    return Util.fixPrecision(math.evaluate(eq, scope));
   }
 
   getResultWithUncertainty(): string {
@@ -139,6 +150,10 @@ export class AppComponent {
 
       return `${this.resultVariable} = \\left( ${roundedResult} \\pm ${roundedUncertainty} \\right) \\times 10^{${resultExp}}`;
     } catch (ex) {
+      if (!(ex instanceof SyntaxError)) {
+        console.log(ex);
+      }
+
       return '';
     }
   }

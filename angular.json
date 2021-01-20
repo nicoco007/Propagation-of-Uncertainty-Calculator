@@ -26,7 +26,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/mathjs/dist/math.js",
+              "node_modules/mathjs/lib/browser/math.js",
               "node_modules/katex/dist/katex.js"
             ]
           },
@@ -80,7 +80,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "node_modules/mathjs/dist/math.js",
+              "node_modules/mathjs/lib/browser/math.js",
               "node_modules/katex/dist/katex.js"
             ],
             "styles": [
