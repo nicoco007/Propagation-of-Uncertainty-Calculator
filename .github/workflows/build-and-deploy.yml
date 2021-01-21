@@ -36,7 +36,7 @@ jobs:
           name=$(git log -n 1 --pretty="%an")
           email=$(git log -n 1 --pretty="%ae")
 
-          git clone https://nicoco007:${{ github.token }}@github.com/nicoco007/Propagation-of-Uncertainty-Calculator gh-pages --no-checkout --single-branch --branch gh-pages
+          git clone https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} gh-pages --no-checkout --single-branch --branch gh-pages
 
           cp -r dist/** gh-pages
           cd gh-pages
