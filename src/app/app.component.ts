@@ -157,4 +157,9 @@ export class AppComponent {
       return '';
     }
   }
+
+  copyToClipboard() {
+    let code = `\\[${this.getResultFunction()}\\]\\[${this.getDeltaResultFunction()}\\]\\[${this.getResultWithUncertainty()}\\]`;
+    navigator.clipboard.writeText(code);
+  }
 }

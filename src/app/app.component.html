@@ -22,6 +22,7 @@
 </div>
 
 <h2>Result</h2>
+<button class="btn btn-secondary btn-sm" (click)="copyToClipboard()">Copy LaTeX code to clipboard</button>
 <div class="result">
   <p [katex]="getResultFunction()"></p>
   <p [katex]="getDeltaResultFunction()"></p>
