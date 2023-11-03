@@ -70,7 +70,6 @@ export class AppComponent {
       const steps = [];
       const parts = [];
       const parts2 = [];
-      const parts3 = [];
 
       const scope = {};
 
@@ -83,9 +82,7 @@ export class AppComponent {
         }
 
         parts.push(`\\left( \\frac{\\partial ${this.resultVariable}}{\\partial ${variable.name}} \\Delta ${variable.name} \\right)^2`);
-        parts2.push('\\left( ' + derivative + ' \\cdot \\Delta ' + variable.name + '\\right)^2');
-
-        parts3.push('(' + derivative.toString() + ' * ' + variable.delta + ')^2');
+        parts2.push('\\left( \\left( ' + derivative + ' \\right) \\cdot \\Delta ' + variable.name + ' \\right)^2');
 
         scope[variable.name] = variable.value;
       }
@@ -127,7 +124,7 @@ export class AppComponent {
     for (let i = 0; i < this.variables.length; i++) {
       const variable = this.variables[i];
       const derivative = math.derivative(this.equation, variable.name);
-      parts.push('(' + derivative.toString() + ' * ' + variable.delta + ')^2');
+      parts.push('((' + derivative.toString() + ') * ' + variable.delta + ')^2');
 
       scope[variable.name] = variable.value;
     }
